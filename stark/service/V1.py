@@ -17,22 +17,32 @@ class StarkConfig(object):
 
     def __init__(self,mcls):
         self.mcls=mcls
+
         self._app_name = self.mcls._meta.app_label
         self._model_name = self.mcls._meta.model_name
-        self._list_url="%s_%s_list" %(self._app_name,self._model_name)
-        self._add_url="%s_%s_add" %(self._app_name,self._model_name)
-        self._change_url="%s_%s_change" %(self._app_name,self._model_name)
-        self._del_url="%s_%s_del" %(self._app_name,self._model_name)
+
+        # 将增删改查的四个 url地址 别名，以及用来反向查询url的全量表示 namespace:name 放在初始化信息中，方便后面调用
+        self._url_dict={
+            "list_url_alias":"%s_%s_list" %(self._app_name,self._model_name) ,
+            "add_url_alias":"%s_%s_add" %(self._app_name,self._model_name) ,
+            "change_url_alias":"%s_%s_change" %(self._app_name,self._model_name) ,
+            "del_url_alias":"%s_%s_del" %(self._app_name,self._model_name) ,
+            "list_url":"stark:%s_%s_list" %(self._app_name,self._model_name) ,
+            "add_url":"stark:%s_%s_add" %(self._app_name,self._model_name) ,
+            "change_url":"stark:%s_%s_change" %(self._app_name,self._model_name) ,
+            "del_url":"stark:%s_%s_del" %(self._app_name,self._model_name) ,
+        }
+
 
     # 定义增删改查四个url  二级页面的路径前面需要加/ ，如 /add/
     @property
     def urls(self):
 
         pts = [
-            path('', self.list_views,name=self._list_url),
-            path('add/', self.add_views,name=self._add_url),
-            path('<int:nid>/change/', self.change_views,name=self._change_url),
-            path('<int:nid>/del/', self.del_views,name=self._del_url),
+            path('', self.list_views,name=self._url_dict["list_url_alias"]),
+            path('add/', self.add_views,name=self._url_dict["add_url_alias"]),
+            path('<int:nid>/change/', self.change_views,name=self._url_dict["change_url_alias"]),
+            path('<int:nid>/del/', self.del_views,name=self._url_dict["del_url_alias"]),
         ]
 
         pts.extend(self.extend_url())  # 拓展除了增删改查基本外的url
@@ -84,19 +94,9 @@ class StarkConfig(object):
                     temp.append(val)
                 data_list.append(temp)
 
-            # 添加页面的 url地址，反向生成
-            # urlname = "%s:%s_%s_add" % (namespace,self.app_name, self.model_name)
-            add_urlname = "stark:%s" % (self._add_url,)
-            change_urlname = "stark:%s" % (self._change_url,)
-            del_urlname = "stark:%s" % (self._del_url,)
-
-
-            add_url=reverse(add_urlname)
-            # change_url=reverse(change_urlname)
-            # del_url=reverse(del_urlname)
-            # add_url=""
+            add_url=reverse(self._url_dict["add_url"])
             return render(request,"list_views.html",{"data_list":data_list,"head_list":head_list,
-                        "add_url":add_url })
+                        "add_url": add_url})
 
     def add_views(self,request):
 
@@ -107,8 +107,7 @@ class StarkConfig(object):
             form=self.getModelForm(request.POST)
             if form.is_valid():
                 form.save()
-                list_url=reverse("stark:%s" % (self._list_url,))
-                return redirect(list_url)
+                return redirect(reverse(self._url_dict["list_url"]))
             return render(request,"add_views.html",{"form":form})
 
         return HttpResponse("增加页面")
@@ -122,29 +121,17 @@ class StarkConfig(object):
         if request.method=="GET":
             return render(request,"change_views.html",{'form':form})
         else:
-            list_urlname = "stark:%s" % (self._list_url,)
-            list_url=reverse(list_urlname)
-
             form = self.getModelForm(data=request.POST,instance=obj)
             if form.is_valid():
                 form.save()
-            return redirect(list_url)
-
-
-        return HttpResponse("编辑页面")
+            return redirect(reverse(self._url_dict["list_url"]))
 
     def del_views(self,request,nid):
-        list_urlname = "stark:%s" % (self._list_url,)
-        list_url = reverse(list_urlname)
-
         filter_obj = self.mcls.objects.filter(id=nid)
         # 这里直接删除
         if filter_obj:
             filter_obj.delete()
-            return redirect(list_url)
-        else:
-            redirect(list_url)
-
+        return redirect(reverse(self._url_dict["list_url"]))
 
 # 定义字典来存储 models类
 class StarkSite(object):
