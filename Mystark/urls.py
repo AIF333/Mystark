@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from stark.service import V1
 from app01 import views as app_views
 # url/path 本质 前面是地址，后面其实是一个元祖
@@ -22,5 +22,7 @@ from app01 import views as app_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/',app_views.test),
-    path('stark/', V1.site.urls),
+    # path('stark/', V1.site.urls),
+    # 指定  namespace这个很蛋疼的形式
+    path('stark/', include((V1.site.urls,'stark'),namespace="stark")),
 ]

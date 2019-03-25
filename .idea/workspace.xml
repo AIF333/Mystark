@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="12bc7cc7-f36f-4d7b-817b-4f6a0efbe3f3" name="Default Changelist" comment="" />
+    <list default="true" id="12bc7cc7-f36f-4d7b-817b-4f6a0efbe3f3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mystark/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mystark/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mystark/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mystark/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app01/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app01/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app01/stark.py" beforeDir="false" afterPath="$PROJECT_DIR$/app01/stark.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app01/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app01/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stark/service/V1.py" beforeDir="false" afterPath="$PROJECT_DIR$/stark/service/V1.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,24 +63,33 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="app01_userinfo" value="1" />
-          <entry key="py" value="46" />
+          <entry key="app01_role" value="1" />
+          <entry key="app01_userinfo" value="2" />
+          <entry key="html" value="3" />
+          <entry key="js" value="2" />
+          <entry key="py" value="56" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Database Element" value="1" />
-          <entry key="Python" value="46" />
+          <entry key="Database Element" value="3" />
+          <entry key="HTML" value="3" />
+          <entry key="JavaScript" value="2" />
+          <entry key="Python" value="56" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="3409" />
+          <entry key="cell" value="64" />
+          <entry key="html" value="953" />
+          <entry key="py" value="6146" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="3409" />
+          <entry key="HTML" value="953" />
+          <entry key="Python" value="6146" />
+          <entry key="Scratch" value="64" />
         </counts>
       </usages-collector>
     </session>
@@ -81,8 +99,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stark/apps.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="407">
-              <caret line="11" column="33" lean-forward="true" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
+            <state relative-caret-position="389">
+              <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -90,8 +108,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app01/stark.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="74">
-              <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
+            <state relative-caret-position="552">
+              <caret line="36" column="62" selection-start-line="36" selection-start-column="62" selection-end-line="36" selection-end-column="62" />
+              <folding>
+                <element signature="e#29#86#0" expanded="true" />
+                <marker date="1553501767487" expanded="true" signature="288:1151" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -99,14 +121,68 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/stark/service/V1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="38" column="33" lean-forward="true" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
+            <state relative-caret-position="406">
+              <caret line="143" column="37" selection-start-line="143" selection-start-column="37" selection-end-line="143" selection-end-column="37" />
               <folding>
-                <element signature="e#11#68#0" expanded="true" />
+                <element signature="e#11#41#0" expanded="true" />
+                <element signature="e#3086#3196#0" />
                 <element signature="e#1377#1586#1" />
                 <element signature="e#1717#1757#0" />
                 <element signature="e#1819#1952#1" />
-                <marker date="1553477047692" expanded="true" signature="775:837" ph="..." />
+                <marker date="1553501981679" expanded="true" signature="1222:1227" ph="..." />
+                <marker date="1553501981679" expanded="true" signature="1472:1640" ph="..." />
+                <marker date="1553501981679" expanded="false" signature="3903:3941" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app01/templates/change_views.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="333">
+              <caret line="24" column="35" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app01/templates/add_views.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="96">
+              <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Mystark/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="137">
+              <caret line="25" column="27" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
+              <folding>
+                <element signature="e#631#663#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app01/templates/list_views.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="173">
+              <caret line="36" column="24" selection-start-line="36" selection-start-column="24" selection-end-line="36" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app01/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+              <folding>
+                <marker date="1553486326217" expanded="true" signature="103:108" ph="..." />
               </folding>
             </state>
           </provider>
@@ -117,22 +193,30 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="HTML File" />
         <option value="Python Script" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/stark/stark.py" />
-        <option value="$PROJECT_DIR$/Mystark/settings.py" />
         <option value="$PROJECT_DIR$/stark/admin.py" />
-        <option value="$PROJECT_DIR$/app01/models.py" />
         <option value="$PROJECT_DIR$/stark/apps.py" />
-        <option value="$PROJECT_DIR$/Mystark/urls.py" />
-        <option value="$PROJECT_DIR$/app01/views.py" />
-        <option value="$PROJECT_DIR$/app01/stark.py" />
         <option value="$PROJECT_DIR$/app01/tests.py" />
+        <option value="$PROJECT_DIR$/Mystark/settings.py" />
+        <option value="$PROJECT_DIR$/app01/forms.py" />
+        <option value="$PROJECT_DIR$/app01/models.py" />
+        <option value="$PROJECT_DIR$/app01/views.py" />
+        <option value="$PROJECT_DIR$/Mystark/urls.py" />
+        <option value="$PROJECT_DIR$/app01/templates/add_views.html" />
+        <option value="$PROJECT_DIR$/app01/templates/change_views.html" />
+        <option value="$PROJECT_DIR$/app01/templates/list_views.html" />
+        <option value="$PROJECT_DIR$/app01/stark.py" />
         <option value="$PROJECT_DIR$/stark/service/V1.py" />
       </list>
     </option>
@@ -146,6 +230,9 @@
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="width" value="533" />
     <option name="height" value="852" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -167,7 +254,13 @@
             <path>
               <item name="Mystark" type="b2602c69:ProjectViewProjectNode" />
               <item name="Mystark" type="462c0819:PsiDirectoryNode" />
-              <item name="stark" type="462c0819:PsiDirectoryNode" />
+              <item name="app01" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Mystark" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Mystark" type="462c0819:PsiDirectoryNode" />
+              <item name="Mystark" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Mystark" type="b2602c69:ProjectViewProjectNode" />
@@ -181,12 +274,21 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="database.console.LAST_STATE" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../cnblog-dev" />
+    <property name="database.console.LAST_STATE" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../MakeSomeTools" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Lern\python\django\pro\Mystark\app01\templates" />
+      <recent name="E:\Lern\python\django\pro\Mystark\static\plugins\dist" />
+      <recent name="E:\Lern\python\django\pro\Mystark\static\plugins" />
+      <recent name="E:\Lern\python\django\pro\Mystark\app01" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -284,7 +386,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15025906" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14637306" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" />
@@ -295,7 +397,7 @@
       <window_info anchor="bottom" id="Database Console" weight="0.32954547" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.421875" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.4744318" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -316,13 +418,6 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Mystark/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/contrib/admin/sites.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="523" column="6" selection-start-line="523" selection-start-column="6" selection-end-line="523" selection-end-column="6" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/contrib/admin/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -368,34 +463,10 @@
     <entry file="file://$PROJECT_DIR$/stark/models.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app01/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="3" column="14" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="14" />
-          <folding>
-            <marker date="1553395321861" expanded="true" signature="86:91" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://570eca6b-5ebd-4a95-b4c1-19a49967f496/schema/main/table/app01_userinfo">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/apps/registry.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="386">
           <caret line="130" selection-start-line="130" selection-end-line="130" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Mystark/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-21">
-          <caret line="39" column="20" lean-forward="true" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -406,26 +477,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app01/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="5" column="74" selection-start-line="5" selection-start-column="57" selection-end-line="5" selection-end-column="74" />
-          <folding>
-            <marker date="1553405419887" expanded="true" signature="103:108" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Mystark/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="24" column="30" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
-          <folding>
-            <element signature="e#631#663#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app01/tests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -433,30 +484,154 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/static/plugins/dist/js/npm.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/plugins/dist/jquery-3.3.1.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Mystark/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="118" lean-forward="true" selection-start-line="118" selection-end-line="118" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://570eca6b-5ebd-4a95-b4c1-19a49967f496/schema/main/table/app01_userinfo">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://570eca6b-5ebd-4a95-b4c1-19a49967f496/schema/main/table/app01_role">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app01/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="3" selection-start-line="3" selection-end-line="5" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#57#0" expanded="true" />
+            <marker date="1553480071848" expanded="true" signature="90:138" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app01/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="8" column="43" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
+          <folding>
+            <marker date="1553482000658" expanded="true" signature="86:91" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app01/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+          <folding>
+            <marker date="1553486326217" expanded="true" signature="103:108" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Python36/Lib/importlib/_bootstrap.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3993">
+          <caret line="981" column="4" selection-start-line="981" selection-start-column="4" selection-end-line="981" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Python36/Lib/importlib/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="447">
+          <caret line="125" column="30" selection-start-line="125" selection-start-column="30" selection-end-line="125" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/utils/module_loading.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/contrib/admin/sites.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1296">
+          <caret line="525" column="34" lean-forward="true" selection-start-line="525" selection-start-column="34" selection-end-line="525" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Mystark/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="25" column="27" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
+          <folding>
+            <element signature="e#631#663#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app01/templates/add_views.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app01/templates/list_views.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="36" column="24" selection-start-line="36" selection-start-column="24" selection-end-line="36" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/stark/apps.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="11" column="33" lean-forward="true" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
+        <state relative-caret-position="389">
+          <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app01/templates/change_views.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="24" column="35" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app01/stark.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="74">
-          <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
+        <state relative-caret-position="552">
+          <caret line="36" column="62" selection-start-line="36" selection-start-column="62" selection-end-line="36" selection-end-column="62" />
+          <folding>
+            <element signature="e#29#86#0" expanded="true" />
+            <marker date="1553501767487" expanded="true" signature="288:1151" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/stark/service/V1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="38" column="33" lean-forward="true" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
+        <state relative-caret-position="406">
+          <caret line="143" column="37" selection-start-line="143" selection-start-column="37" selection-end-line="143" selection-end-column="37" />
           <folding>
-            <element signature="e#11#68#0" expanded="true" />
+            <element signature="e#11#41#0" expanded="true" />
+            <element signature="e#3086#3196#0" />
             <element signature="e#1377#1586#1" />
             <element signature="e#1717#1757#0" />
             <element signature="e#1819#1952#1" />
-            <marker date="1553477047692" expanded="true" signature="775:837" ph="..." />
+            <marker date="1553501981679" expanded="true" signature="1222:1227" ph="..." />
+            <marker date="1553501981679" expanded="true" signature="1472:1640" ph="..." />
+            <marker date="1553501981679" expanded="false" signature="3903:3941" ph="..." />
           </folding>
         </state>
       </provider>

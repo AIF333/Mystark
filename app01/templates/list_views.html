@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表页面</title>
+    <link rel="stylesheet" href="/static/plugins/dist/css/bootstrap.css">
+    <script src="/static/plugins/dist/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" href="/static/plugins/dist/js/bootstrap.js">
+
+    <style>
+        .addRecord{
+            margin-top: 30px;
+            margin-bottom: 10px;
+            margin-left: 10px;
+            font-size: 5spx;
+        }
+    </style>
+</head>
+<body>
+
+<h3>列表页面</h3>
+
+<a href="{{ add_url }}" class="btn btn-primary addRecord">添加</a>
+<!--报表-->
+<table class="table table-bordered">
+    <tr>
+        {% for head in head_list %}
+            <th>{{ head }}</th>
+        {% endfor %}
+    </tr>
+
+
+    {% for data in data_list %}
+        <tr>
+            {% for col in data %}
+                <td>{{ col }}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+
+</table>
+
+</body>
+</html>
