@@ -9,19 +9,18 @@
 
     <style>
         .addRecord{
-            margin-top: 30px;
-            margin-bottom: 10px;
-            margin-left: 10px;
-            font-size: 5spx;
+            margin-top: 10px;
+            margin-bottom: 5px;
         }
     </style>
 </head>
 <body>
-
+<div class="container">
 <h3>列表页面</h3>
 
 <a href="{{ add_url }}" class="btn btn-primary addRecord">添加</a>
 <!--报表-->
+
 <table class="table table-bordered">
     <tr>
         {% for head in head_list %}
@@ -33,12 +32,14 @@
     {% for data in data_list %}
         <tr>
             {% for col in data %}
-                <td>{{ col }}</td>
+                    <td>{{ col }}</td>
             {% endfor %}
         </tr>
     {% endfor %}
 
 </table>
+
+</div>
 
 </body>
 </html>

@@ -16,9 +16,10 @@ class StarkConfig(object):
     '''
     # /展示的字段
     list_display=[]
-
     # 添加三个基本列的标识
     add_3display_flag=False
+    # ModelForm模板
+    model_form_cls=None
 
     def __init__(self,mcls):
         self.mcls=mcls
@@ -39,6 +40,12 @@ class StarkConfig(object):
         }
 
     ########三个基本的列： 选择  编辑  删除  start########################
+    def forloop_display(self,is_header=False,row=None): # 这个生成的顺序不好调整，暂时放着
+        if is_header:
+            return "序号"
+        else:
+            return 'forloop.counter'
+
     def checkbox_display(self,is_header=False,row=None):
         if is_header:
             return "选择"
@@ -88,8 +95,11 @@ class StarkConfig(object):
         path_list=[]
         return list(path_list)
 
-    @property # 获取类的 ModelForm
+    @property # 获取ModelForm类,如果定义了用定义的，没有则用默认的
     def getModelForm(self):
+        if self.model_form_cls:
+            return self.model_form_cls
+
         class TempModleForm(ModelForm):
             class Meta:
                 model = self.mcls
@@ -164,7 +174,7 @@ class StarkConfig(object):
 
     def change_views(self,request,nid):
 
-        obj = self.mcls.objects.filter(id=nid).first()
+        obj = self.mcls.objects.filter(pk=nid).first()
 
         form = self.getModelForm(instance=obj)
         if request.method=="GET":
@@ -176,7 +186,7 @@ class StarkConfig(object):
             return redirect(reverse(self._url_dict["list_url"]))
 
     def del_views(self,request,nid):
-        filter_obj = self.mcls.objects.filter(id=nid)
+        filter_obj = self.mcls.objects.filter(pk=nid)
         # 这里直接删除
         if filter_obj:
             filter_obj.delete()

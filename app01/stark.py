@@ -74,6 +74,8 @@ class RoleConfig(StarkConfig):
 # 进行site注册，即往site字典里加入 models
 site.registry(models.UserInfo,UserInfoConfig)
 site.registry(models.Role,RoleConfig)
+site.registry(models.Department)
+site.registry(models.Hobby)
 
 
 
