@@ -17,6 +17,9 @@ class StarkConfig(object):
     # /展示的字段
     list_display=[]
 
+    # 添加三个基本列的标识
+    add_3display_flag=False
+
     def __init__(self,mcls):
         self.mcls=mcls
 
@@ -35,8 +38,15 @@ class StarkConfig(object):
             "del_url":"stark:%s_%s_del" %(self._app_name,self._model_name) ,
         }
 
+    ########三个基本的列： 选择  编辑  删除  start########################
+    def checkbox_display(self,is_header=False,row=None):
+        if is_header:
+            return "选择"
+        else:
+            return  mark_safe('<input type="checkbox" name="pk" value=%s />' % (row.id,)  )
+
     # 定义编辑字段和对应的url
-    def change_func(self,is_header=False,row=None):
+    def change_display(self,is_header=False,row=None):
         if is_header:
             return "编辑"
         else:
@@ -44,13 +54,16 @@ class StarkConfig(object):
             return  mark_safe( '<a href="%s">编辑<a/>' % (url,))
 
     # 定义 删除字段和对应的url
-    def del_func(self,is_header=False,row=None):
+    def del_display(self,is_header=False,row=None):
         if is_header:
             return "删除"
         else:
             # url="stark/%s/%s/%s/change/"%(self._app_name,self._model_name,row.id)
             url="%s/del/"%(row.id,)
             return  mark_safe( '<a href="%s">删除<a/>' % (url,))
+
+    ########三个基本的列： 选择  编辑  删除  end########################
+
 
     # 定义增删改查四个url  二级页面的路径前面需要加/ ，如 /add/
     @property
@@ -95,8 +108,14 @@ class StarkConfig(object):
             '''
             if not self.list_display:
                 self.list_display=[ self.mcls._meta.fields[i].name for i in range(len(self.mcls._meta.fields)) ]
-                self.list_display.append(self.change_func)
-                self.list_display.append(self.del_func)
+
+            # 三个基本列只添加一次，否则会在页面上刷新展示翻倍
+            if not self.add_3display_flag:
+                self.list_display.insert(0,self.checkbox_display)
+                self.list_display.append(self.change_display)
+                self.list_display.append(self.del_display)
+                self.add_3display_flag=True
+            print("---",self.list_display)
 
             # 获取字段的 verbose_name
             head_list=[]
@@ -124,6 +143,7 @@ class StarkConfig(object):
                 data_list.append(temp)
 
             add_url=reverse(self._url_dict["add_url"])
+
             return render(request,"list_views.html",{"data_list":data_list,"head_list":head_list,
                         "add_url": add_url})
 
@@ -207,9 +227,6 @@ class StarkSite(object):
         返回 所有注册的类自动生成的url元祖
         '''
         return self.get_urls()
-
-    def login(self,request):
-        return HttpResponse("登录页面")
 
 # 实例化一个site ，这里利用了单列模型，site生成后就不会再重复生成，也利用了字典的可变性
 # 实现对 models 的添加，也是一种程序内部的数据交换方式

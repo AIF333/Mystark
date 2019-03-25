@@ -18,24 +18,35 @@ class UserInfoConfig(StarkConfig):
     def sayHi(self,request):
         return HttpResponse("Hi!")
 
-    def change_func(self,is_header=False,row=None):
+    def gender_display(self,is_header=False,row=None):
         if is_header:
-            return "编辑"
+            return "性别"
         else:
-            url="%s/change/"%(row.id,)
-            return  mark_safe( '<a href="%s">编辑<a/>' % (url,))
+            '''
+            if row.gender == 1 :
+                return "男"
+            else:
+                return "女"
+            对于 choice字段这种判断等价于 row.get_字段_display()
+            '''
+            return row.get_gender_display()
 
-    def del_func(self,is_header=False,row=None):
+    def dp_display(self,is_header=False,row=None):
         if is_header:
-            return "删除"
+            return "部门"
         else:
-            # url="stark/%s/%s/%s/change/"%(self._app_name,self._model_name,row.id)
-            url="%s/del/"%(row.id,)
-            return  mark_safe( '<a href="%s">删除<a/>' % (url,))
-
-    # change_func传过去的是函数，因为在类内部，此时类还未创建，所以直接写就行
-    # （正常写成 UserInfoConfig.change_func）
-    list_display=['id','username','email',change_func,del_func] # 展示字段
+            return row.dp.title
+    def hobby_display(self,is_header=False,row=None):
+        if is_header:
+            return "爱好"
+        else:
+            return row.hobby.all().values_list("title")
+    '''
+    change_func传过去的是函数，因为在类内部，此时类还未创建，所以直接写就行
+     （正常写成 UserInfoConfig.change_func）
+     展示字段 不写则全字段展示，但是会存在不翻译问题，如 gender会显示0,1而不是男女 ，外键会展示 类对象，而不是 需要的字段
+    '''
+    list_display=['id','username','email',gender_display,dp_display]
 
 
 
