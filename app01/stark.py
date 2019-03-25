@@ -33,7 +33,12 @@ class UserInfoConfig(StarkConfig):
             url="%s/del/"%(row.id,)
             return  mark_safe( '<a href="%s">删除<a/>' % (url,))
 
+    # change_func传过去的是函数，因为在类内部，此时类还未创建，所以直接写就行
+    # （正常写成 UserInfoConfig.change_func）
     list_display=['id','username','email',change_func,del_func] # 展示字段
+
+
+
 
 class RoleConfig(StarkConfig):
 
@@ -52,7 +57,7 @@ class RoleConfig(StarkConfig):
             url="%s/del/"%(row.id,)
             return  mark_safe( '<a href="%s">删除<a/>' % (url,))
 
-    list_display=['id','title',change_func,del_func] # 展示字段
+    # list_display=['id','title',change_func,del_func] # 展示字段
 
 
 # 进行site注册，即往site字典里加入 models

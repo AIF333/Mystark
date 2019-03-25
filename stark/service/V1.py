@@ -1,9 +1,11 @@
 # stark 配置
-from types import FunctionType
+from types import FunctionType,MethodType
 
 from django.shortcuts import render,HttpResponse,redirect
 from django.urls import path, reverse
 from django.forms import ModelForm
+from django.utils.safestring import mark_safe
+
 from app01 import models
 
 # path 的一级分发的namespace
@@ -33,6 +35,22 @@ class StarkConfig(object):
             "del_url":"stark:%s_%s_del" %(self._app_name,self._model_name) ,
         }
 
+    # 定义编辑字段和对应的url
+    def change_func(self,is_header=False,row=None):
+        if is_header:
+            return "编辑"
+        else:
+            url="%s/change/"%(row.id,)
+            return  mark_safe( '<a href="%s">编辑<a/>' % (url,))
+
+    # 定义 删除字段和对应的url
+    def del_func(self,is_header=False,row=None):
+        if is_header:
+            return "删除"
+        else:
+            # url="stark/%s/%s/%s/change/"%(self._app_name,self._model_name,row.id)
+            url="%s/del/"%(row.id,)
+            return  mark_safe( '<a href="%s">删除<a/>' % (url,))
 
     # 定义增删改查四个url  二级页面的路径前面需要加/ ，如 /add/
     @property
@@ -69,16 +87,25 @@ class StarkConfig(object):
     def list_views(self,request):
         if request.method=="GET":
             list_obj=self.mcls.objects.all() # 获取表中所有记录
-            # 获取表中的所有字段eg: ['id', 'username', 'email']
-            # list_display=[ self.mcls._meta.fields[i].name for i in range(len(self.mcls._meta.fields)) ]
-            # head_list=[ self.mcls._meta.fields[i].verbose_name for i in range(len(self.mcls._meta.fields)) ]
+
+            # 如果用户未传入list_display 则默认展示全字段，并添加 编辑和删除功能,需注意区分函数和方法
+            '''
+            函数：1.定义在类外的都是函数      2.通过类调用的  Foo.func 也是函数，在调用时 self，需人工传入
+            方法：通过实例（对象调用）的类的obj.func 就都是方法,方法里的self 不用再传入，会自动将 obj当做self传递
+            '''
+            if not self.list_display:
+                self.list_display=[ self.mcls._meta.fields[i].name for i in range(len(self.mcls._meta.fields)) ]
+                self.list_display.append(self.change_func)
+                self.list_display.append(self.del_func)
 
             # 获取字段的 verbose_name
             head_list=[]
             for col in self.list_display:
-                if isinstance(col,FunctionType):
+                if isinstance(col,FunctionType): # 如果是用户重写传入的 方法
                     temp=col(self,is_header=True)
-                else:
+                elif isinstance(col,MethodType): # 如果是 类内部定义的方法
+                    temp=col(is_header=True)
+                else: # 如果是字符串，即表自身字段
                     temp=self.mcls._meta.get_field(col).verbose_name
                 head_list.append(temp)
 
@@ -87,9 +114,11 @@ class StarkConfig(object):
             for row in list_obj:
                 temp=[]
                 for col in self.list_display:
-                    if isinstance(col,FunctionType):
+                    if isinstance(col,FunctionType): # 如果是用户重写传入的 方法
                         val = col(self,row=row)
-                    else:
+                    elif isinstance(col,MethodType): # 如果是 类内部定义的方法
+                        val = col(row=row)
+                    else:  # 如果是字符串，即表自身字段
                         val=getattr(row, col)
                     temp.append(val)
                 data_list.append(temp)
