@@ -1,0 +1,1 @@
+print("stark:stark.py 执行")
