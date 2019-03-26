@@ -47,14 +47,15 @@ from django.test import TestCase
 # print(a)
 # print(a.name)
 
+#
+# def foo():
+#     pass
+#
+# class Coo():
+#     def foo(self):
+#         pass
+#
+# print(type(foo))
+# print(type(Coo().foo))
+# print(type(Coo.foo))
 
-def foo():
-    pass
-
-class Coo():
-    def foo(self):
-        pass
-
-print(type(foo))
-print(type(Coo().foo))
-print(type(Coo.foo))

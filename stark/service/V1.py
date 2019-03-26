@@ -7,10 +7,9 @@ from django.forms import ModelForm
 from django.utils.safestring import mark_safe
 from stark.utils.pagination import Pageination # 分页组件
 
-
 # path 的一级分发的namespace
 
-# 分页
+# 分页组件
 class Page():
     '''分页功能'''
 
@@ -25,8 +24,11 @@ class Page():
         pagedict["url"] = request.path_info
         pagedict["record_sum"] = queryResult.count()
         pagedict["current_page"] = request.GET.get("page")
+        pagedict["request"] = request
         pagedict["max_pages"] = 11  # 默认11，可不传入
         pagedict["max_records"] = 10  # 默认10，可不传入
+
+
 
         page_obj = Pageination(**pagedict)
 
@@ -94,9 +96,10 @@ class StarkConfig(object):
             url="%s/del/"%(row.id,)
             return  mark_safe( '<a href="%s">删除<a/>' % (url,))
 
-    ########三个基本的列： 选择  编辑  删除  end########################
+    ############# 三个基本的列： 选择  编辑  删除  end #############
 
 
+    ###################  url配置相关 start ########################
     # 定义增删改查四个url  二级页面的路径前面需要加/ ，如 /add/
     @property
     def urls(self):
@@ -131,7 +134,9 @@ class StarkConfig(object):
                 fields = "__all__"
         return TempModleForm
 
-    # 视图函数至少有一个 request 参数
+    ###################  url配置相关 end ########################
+
+    ########t##  四个基本视图 增删改查 start ######################
     def list_views(self,request):
         if request.method=="GET":
 
@@ -202,7 +207,6 @@ class StarkConfig(object):
 
         return HttpResponse("增加页面")
 
-
     def change_views(self,request,nid):
 
         obj = self.mcls.objects.filter(pk=nid).first()
@@ -222,6 +226,9 @@ class StarkConfig(object):
         if filter_obj:
             filter_obj.delete()
         return redirect(reverse(self._url_dict["list_url"]))
+
+    ########t##  四个基本视图 增删改查 end ######################
+
 
 # 定义字典来存储 models类
 class StarkSite(object):
