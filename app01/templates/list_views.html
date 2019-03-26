@@ -29,18 +29,18 @@
 <div class="container">
 <h3>列表页面</h3>
 
-<a href="{{ add_url }}" class="btn btn-info addRecord">添加</a>
+<a href="{{ flv.get_add_url }}" class="btn btn-info addRecord">添加</a>
 <!--报表-->
 
 <table class="table table-bordered">
     <tr>
-        {% for head in head_list %}
+        {% for head in flv.head_list %}
             <th>{{ head }}</th>
         {% endfor %}
     </tr>
 
 
-    {% for data in data_list %}
+    {% for data in flv.data_list %}
         <tr>
             {% for col in data %}
                     <td>{{ col }}</td>
@@ -53,7 +53,7 @@
 <!--分页-->
 <nav aria-label="Page navigation">
      <ul class="pagination">
-        {{ html }}
+        {{ flv.get_page_html }}
     </ul>
 </nav>
 

@@ -9,32 +9,90 @@ from stark.utils.pagination import Pageination # 分页组件
 
 # path 的一级分发的namespace
 
-# 分页组件
-class Page():
+# list_views的工厂类，因为列表页面的代码太多，全部放在工厂类里
+class FacListViews():
     '''分页功能'''
 
-    def __init__(self,config):
+    # 分页对象
+    page_obj = None
+    def __init__(self,config,queryResult,request):
+        '''
+        :param config: 原类的实例，即StarkConfig的self
+        :param queryResult: 表的查询结果querySet类型,如 models.Student.objects.all()
+
+        '''
         self.config=config
+        self.queryResult=queryResult
+        self.request=request
 
-    def get_res_obj(self,request):
-        queryResult = self.config.mcls.objects.all()
-
+    # 初始化分页对象，这个需要先执行
+    def init_page_obj(self):
         pagedict = {}
-        # request.path_info 可获取当前url的路径，如/host/?page=1的path_url=/host/
-        pagedict["url"] = request.path_info
-        pagedict["record_sum"] = queryResult.count()
-        pagedict["current_page"] = request.GET.get("page")
-        pagedict["request"] = request
+        pagedict["url"] = self.request.path_info # request.path_info 可获取当前url的路径，如/host/?page=1的path_url=/host/
+        pagedict["record_sum"] = self.queryResult.count()
+        pagedict["current_page"] = self.request.GET.get("page")
+        pagedict["request"] = self.request
         pagedict["max_pages"] = 11  # 默认11，可不传入
         pagedict["max_records"] = 10  # 默认10，可不传入
 
+        self.page_obj = Pageination(**pagedict)
 
+    # 返回前端的 分页html
+    def get_page_html(self):
+        html = self.page_obj.bootstrap_page()
+        return html
 
-        page_obj = Pageination(**pagedict)
+    # 列表的头显示
+    def head_list(self):
+        # 先初始化page对象
+        self.init_page_obj()
 
-        res_obj = queryResult[page_obj.start:page_obj.end]
-        html = page_obj.bootstrap_page()
-        return res_obj,html
+        if not self.config.list_display:
+            self.config.list_display = [self.config.mcls._meta.fields[i].name for i in range(len(self.config.mcls._meta.fields))]
+
+        # 三个基本列只添加一次，否则会在页面上刷新展示翻倍
+        if not self.config.add_3display_flag:
+            self.config.list_display.insert(0, self.config.checkbox_display)
+            self.config.list_display.append(self.config.change_display)
+            self.config.list_display.append(self.config.del_display)
+            self.config.add_3display_flag = True
+
+        # 获取字段的 verbose_name
+        head_list = []
+        for col in self.config.list_display:
+            if isinstance(col, FunctionType):  # 如果是用户重写传入的 方法
+                temp = col(self.config, is_header=True)
+            elif isinstance(col, MethodType):  # 如果是 类内部定义的方法
+                temp = col(is_header=True)
+            else:  # 如果是字符串，即表自身字段
+                temp = self.config.mcls._meta.get_field(col).verbose_name
+            head_list.append(temp)
+
+        return head_list
+
+    # 列表的数据显示
+    def data_list(self):
+        # 将表记录取出放在列表中然后传入到前端，不能直接在前端用 obj.col ,这个会报错，因为 obj是动态的，col也是动态的
+        data_list = []
+        list_obj = self.queryResult[self.page_obj.start:self.page_obj.end]
+        for row in list_obj:
+            temp = []
+            for col in self.config.list_display:
+                if isinstance(col, FunctionType):  # 如果是用户重写传入的 方法
+                    val = col(self.config, row=row)
+                elif isinstance(col, MethodType):  # 如果是 类内部定义的方法
+                    val = col(row=row)
+                else:  # 如果是字符串，即表自身字段
+                    val = getattr(row, col)
+                temp.append(val)
+            data_list.append(temp)
+        return data_list
+
+    # 增加按钮指定页面
+    def get_add_url(self):
+        add_url = reverse(self.config._url_dict["add_url"])
+        return add_url
+
 
 class StarkConfig(object):
     '''
@@ -140,58 +198,13 @@ class StarkConfig(object):
     def list_views(self,request):
         if request.method=="GET":
 
-            # 分页
-            page=Page(self)
-            # list_obj = self.mcls.objects.all()  # 获取表中所有记录,如果采用分页则这里需要改成分页取的记录
-            list_obj,html=page.get_res_obj(request)
+            queryResult=self.mcls.objects.all()
 
+            # 利用工厂函数生成分页的数据项和html
+            flv=FacListViews(self,queryResult,request)
+            # print(flv.get_page_html())
 
-
-            # 如果用户未传入list_display 则默认展示全字段，并添加 编辑和删除功能,需注意区分函数和方法
-            '''
-            函数：1.定义在类外的都是函数      2.通过类调用的  Foo.func 也是函数，在调用时 self，需人工传入
-            方法：通过实例（对象调用）的类的obj.func 就都是方法,方法里的self 不用再传入，会自动将 obj当做self传递
-            '''
-            if not self.list_display:
-                self.list_display=[ self.mcls._meta.fields[i].name for i in range(len(self.mcls._meta.fields)) ]
-
-            # 三个基本列只添加一次，否则会在页面上刷新展示翻倍
-            if not self.add_3display_flag:
-                self.list_display.insert(0,self.checkbox_display)
-                self.list_display.append(self.change_display)
-                self.list_display.append(self.del_display)
-                self.add_3display_flag=True
-            print("---",self.list_display)
-
-            # 获取字段的 verbose_name
-            head_list=[]
-            for col in self.list_display:
-                if isinstance(col,FunctionType): # 如果是用户重写传入的 方法
-                    temp=col(self,is_header=True)
-                elif isinstance(col,MethodType): # 如果是 类内部定义的方法
-                    temp=col(is_header=True)
-                else: # 如果是字符串，即表自身字段
-                    temp=self.mcls._meta.get_field(col).verbose_name
-                head_list.append(temp)
-
-            # 将表记录取出放在列表中然后传入到前端，不能直接在前端用 obj.col ,这个会报错，因为 obj是动态的，col也是动态的
-            data_list=[]
-            for row in list_obj:
-                temp=[]
-                for col in self.list_display:
-                    if isinstance(col,FunctionType): # 如果是用户重写传入的 方法
-                        val = col(self,row=row)
-                    elif isinstance(col,MethodType): # 如果是 类内部定义的方法
-                        val = col(row=row)
-                    else:  # 如果是字符串，即表自身字段
-                        val=getattr(row, col)
-                    temp.append(val)
-                data_list.append(temp)
-
-            add_url=reverse(self._url_dict["add_url"])
-
-            return render(request,"list_views.html",{"data_list":data_list,"head_list":head_list,
-                        "add_url": add_url ,"html":html})
+            return render(request,"list_views.html",{"flv":flv})
 
     def add_views(self,request):
 
