@@ -12,6 +12,17 @@
             margin-top: 10px;
             margin-bottom: 5px;
         }
+
+        .page a{
+            display: inline-block;
+            padding: 1px 5px;
+            margin: 0px 3px;
+            border: 1px solid darkgrey;
+            text-align: center;
+        }
+        .active{
+            background-color: cornflowerblue;
+        }
     </style>
 </head>
 <body>
@@ -38,6 +49,9 @@
     {% endfor %}
 
 </table>
+
+<!--分页-->
+<div class="page">{{ html }}</div>
 
 </div>
 

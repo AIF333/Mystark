@@ -5,10 +5,34 @@ from django.shortcuts import render,HttpResponse,redirect
 from django.urls import path, reverse
 from django.forms import ModelForm
 from django.utils.safestring import mark_safe
+from stark.utils.pagination import Pageination # 分页组件
 
-from app01 import models
 
 # path 的一级分发的namespace
+
+# 分页
+class Page():
+    '''分页功能'''
+
+    def __init__(self,config):
+        self.config=config
+
+    def get_res_obj(self,request):
+        queryResult = self.config.mcls.objects.all()
+
+        pagedict = {}
+        # request.path_info 可获取当前url的路径，如/host/?page=1的path_url=/host/
+        pagedict["url"] = request.path_info
+        pagedict["record_sum"] = queryResult.count()
+        pagedict["current_page"] = request.GET.get("page")
+        pagedict["max_pages"] = 11  # 默认11，可不传入
+        pagedict["max_records"] = 10  # 默认10，可不传入
+
+        page_obj = Pageination(**pagedict)
+
+        res_obj = queryResult[page_obj.start:page_obj.end]
+        html=page_obj.page()
+        return res_obj,html
 
 class StarkConfig(object):
     '''
@@ -16,10 +40,11 @@ class StarkConfig(object):
     '''
     # /展示的字段
     list_display=[]
-    # 添加三个基本列的标识
-    add_3display_flag=False
     # ModelForm模板
     model_form_cls=None
+
+    # 添加三个基本列的标识
+    add_3display_flag = False
 
     def __init__(self,mcls):
         self.mcls=mcls
@@ -109,7 +134,13 @@ class StarkConfig(object):
     # 视图函数至少有一个 request 参数
     def list_views(self,request):
         if request.method=="GET":
-            list_obj=self.mcls.objects.all() # 获取表中所有记录
+
+            # 分页
+            page=Page(self)
+            # list_obj = self.mcls.objects.all()  # 获取表中所有记录,如果采用分页则这里需要改成分页取的记录
+            list_obj,html=page.get_res_obj(request)
+
+
 
             # 如果用户未传入list_display 则默认展示全字段，并添加 编辑和删除功能,需注意区分函数和方法
             '''
@@ -155,7 +186,7 @@ class StarkConfig(object):
             add_url=reverse(self._url_dict["add_url"])
 
             return render(request,"list_views.html",{"data_list":data_list,"head_list":head_list,
-                        "add_url": add_url})
+                        "add_url": add_url ,"html":html})
 
     def add_views(self,request):
 
