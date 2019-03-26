@@ -45,12 +45,17 @@ class UserInfoConfig(StarkConfig):
     '''
     list_display=['id','username','email',gender_display,dp_display]
 
+    # 搜素列
+    search_list=["username","email"]
+
+class HobbyConfig(StarkConfig):
+    search_list = ["title"]
 
 # 进行site注册，即往site字典里加入 models
 site.registry(models.UserInfo,UserInfoConfig)
 site.registry(models.Role)
 site.registry(models.Department)
-site.registry(models.Hobby)
+site.registry(models.Hobby,HobbyConfig)
 
 
 

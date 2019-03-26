@@ -1,6 +1,7 @@
 # stark 配置
 from types import FunctionType,MethodType
 
+from django.db.models import Q
 from django.shortcuts import render,HttpResponse,redirect
 from django.urls import path, reverse
 from django.forms import ModelForm
@@ -11,21 +12,45 @@ from stark.utils.pagination import Pageination # 分页组件
 
 # list_views的工厂类，因为列表页面的代码太多，全部放在工厂类里
 class FacListViews():
-    '''分页功能'''
 
-    # 分页对象
+    # 分页对象 || 查询结果集对象 || 查询的输入值，需展示在前端
     page_obj = None
-    def __init__(self,config,queryResult,request):
+    queryResult = None
+
+    def __init__(self,config,request):
         '''
         :param config: 原类的实例，即StarkConfig的self
         :param queryResult: 表的查询结果querySet类型,如 models.Student.objects.all()
 
         '''
         self.config=config
-        self.queryResult=queryResult
         self.request=request
+        self.search_list=self.config.search_list
 
-    # 初始化分页对象，这个需要先执行
+        temp=request.GET.get("search_key",'')
+        if temp:  # 剔除空格
+            self.search_key = temp.strip()
+        else:
+            self.search_key=''
+
+    # 获取当前页面的数据，如有查询则数据会有变化,这个是第一个执行的,放在 head_list 里
+    def init_queryResult(self):
+        # 如果用户定义了查询列，则可进行查询
+        queryResult_flag=False
+        if self.config.search_list:
+            if self.search_key: # 如果查询有输入值
+                con = Q()
+                con.connector = 'OR'
+                for col in self.config.search_list:
+                    # print('----', ('%s__contains' % (col,), search_key))
+                    con.children.append(('%s__contains' % (col,), self.search_key))
+                self.queryResult = self.config.mcls.objects.all().filter(con)
+                queryResult_flag=True
+        # 其他情况取全量数据
+        if not queryResult_flag:
+            self.queryResult=self.config.mcls.objects.all()
+
+    # 初始化分页对象，这个是第二个执行，依赖get_queryResult的查询结果集
     def init_page_obj(self):
         pagedict = {}
         pagedict["url"] = self.request.path_info # request.path_info 可获取当前url的路径，如/host/?page=1的path_url=/host/
@@ -45,6 +70,7 @@ class FacListViews():
     # 列表的头显示
     def head_list(self):
         # 先初始化page对象
+        self.init_queryResult()
         self.init_page_obj()
 
         if not self.config.list_display:
@@ -94,6 +120,7 @@ class FacListViews():
         return add_url
 
 
+
 class StarkConfig(object):
     '''
      封装单独的 数据库操作类
@@ -102,9 +129,10 @@ class StarkConfig(object):
     list_display=[]
     # ModelForm模板
     model_form_cls=None
-
     # 添加三个基本列的标识
     add_3display_flag = False
+    # 搜索列表
+    search_list=[]
 
     def __init__(self,mcls):
         self.mcls=mcls
@@ -196,15 +224,12 @@ class StarkConfig(object):
 
     ########t##  四个基本视图 增删改查 start ######################
     def list_views(self,request):
-        if request.method=="GET":
-
-            queryResult=self.mcls.objects.all()
+        if request.method == "GET":
 
             # 利用工厂函数生成分页的数据项和html
-            flv=FacListViews(self,queryResult,request)
-            # print(flv.get_page_html())
-
+            flv = FacListViews(self, request)
             return render(request,"list_views.html",{"flv":flv})
+
 
     def add_views(self,request):
 
