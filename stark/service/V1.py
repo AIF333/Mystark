@@ -31,7 +31,7 @@ class Page():
         page_obj = Pageination(**pagedict)
 
         res_obj = queryResult[page_obj.start:page_obj.end]
-        html=page_obj.page()
+        html = page_obj.bootstrap_page()
         return res_obj,html
 
 class StarkConfig(object):

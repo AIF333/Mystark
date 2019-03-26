@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12bc7cc7-f36f-4d7b-817b-4f6a0efbe3f3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app01/stark.py" beforeDir="false" afterPath="$PROJECT_DIR$/app01/stark.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app01/templates/list_views.html" beforeDir="false" afterPath="$PROJECT_DIR$/app01/templates/list_views.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stark/service/V1.py" beforeDir="false" afterPath="$PROJECT_DIR$/stark/service/V1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stark/utils/pagination.py" beforeDir="false" afterPath="$PROJECT_DIR$/stark/utils/pagination.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -91,7 +89,7 @@
         <counts>
           <entry key="cell" value="108" />
           <entry key="dummy" value="10" />
-          <entry key="html" value="1375" />
+          <entry key="html" value="1382" />
           <entry key="py" value="9076" />
           <entry key="readme" value="21" />
           <entry key="txt" value="1521" />
@@ -99,7 +97,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="1375" />
+          <entry key="HTML" value="1382" />
           <entry key="PLAIN_TEXT" value="1531" />
           <entry key="Python" value="9097" />
           <entry key="Scratch" value="108" />
@@ -121,17 +119,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stark/utils/pagination.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="140" lean-forward="true" selection-start-line="140" selection-end-line="140" />
+            <state relative-caret-position="175">
+              <caret line="143" column="29" lean-forward="true" selection-start-line="143" selection-start-column="29" selection-end-line="143" selection-end-column="29" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stark/service/V1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="28" column="39" selection-start-line="28" selection-start-column="39" selection-end-line="28" selection-end-column="39" />
+            <state relative-caret-position="105">
+              <caret line="33" column="12" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="12" />
               <folding>
                 <element signature="e#11#52#0" expanded="true" />
                 <element signature="e#501#1365#0" />
@@ -146,19 +144,19 @@
                 <element signature="e#6156#6561#0" />
                 <element signature="e#6608#6786#0" />
                 <element signature="e#6835#8165#0" />
-                <marker date="1553572173121" expanded="true" signature="376:409" ph="..." />
-                <marker date="1553572173121" expanded="true" signature="439:448" ph="..." />
-                <marker date="1553572173121" expanded="true" signature="4186:4192" ph="..." />
+                <marker date="1553575650234" expanded="true" signature="376:409" ph="..." />
+                <marker date="1553575650234" expanded="true" signature="439:448" ph="..." />
+                <marker date="1553575650234" expanded="true" signature="4198:4204" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app01/templates/list_views.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="53" column="25" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="25" />
+            <state relative-caret-position="124">
+              <caret line="31" column="43" selection-start-line="31" selection-start-column="43" selection-end-line="31" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -209,9 +207,9 @@
         <option value="$PROJECT_DIR$/stark/d" />
         <option value="$PROJECT_DIR$/stark/readme" />
         <option value="$PROJECT_DIR$/stark/readme.txt" />
-        <option value="$PROJECT_DIR$/app01/templates/list_views.html" />
         <option value="$PROJECT_DIR$/stark/utils/pagination.py" />
         <option value="$PROJECT_DIR$/stark/service/V1.py" />
+        <option value="$PROJECT_DIR$/app01/templates/list_views.html" />
       </list>
     </option>
   </component>
@@ -722,24 +720,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app01/templates/list_views.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="53" column="25" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/stark/utils/pagination.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="140" lean-forward="true" selection-start-line="140" selection-end-line="140" />
+        <state relative-caret-position="175">
+          <caret line="143" column="29" lean-forward="true" selection-start-line="143" selection-start-column="29" selection-end-line="143" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/stark/service/V1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="28" column="39" selection-start-line="28" selection-start-column="39" selection-end-line="28" selection-end-column="39" />
+        <state relative-caret-position="105">
+          <caret line="33" column="12" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="12" />
           <folding>
             <element signature="e#11#52#0" expanded="true" />
             <element signature="e#501#1365#0" />
@@ -754,10 +745,17 @@
             <element signature="e#6156#6561#0" />
             <element signature="e#6608#6786#0" />
             <element signature="e#6835#8165#0" />
-            <marker date="1553572173121" expanded="true" signature="376:409" ph="..." />
-            <marker date="1553572173121" expanded="true" signature="439:448" ph="..." />
-            <marker date="1553572173121" expanded="true" signature="4186:4192" ph="..." />
+            <marker date="1553575650234" expanded="true" signature="376:409" ph="..." />
+            <marker date="1553575650234" expanded="true" signature="439:448" ph="..." />
+            <marker date="1553575650234" expanded="true" signature="4198:4204" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app01/templates/list_views.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="31" column="43" selection-start-line="31" selection-start-column="43" selection-end-line="31" selection-end-column="43" />
         </state>
       </provider>
     </entry>
