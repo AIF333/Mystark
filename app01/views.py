@@ -10,6 +10,8 @@ def test(request):
     # print('----0',models.UserInfo._meta.fields[0].name,type(models.UserInfo._meta.fields[0]))
     # print('++',models.UserInfo._meta.fields[1].verbose_name)
     # print(models.UserInfo._meta.get_field("username").verbose_name)
+    obj=models.Hobby.objects.filter(pk__in=[1,2,3])
+    print(obj)
 
     # obj=models.UserInfo.objects.filter(id=6).first()
     # print(obj)
@@ -21,13 +23,13 @@ def test(request):
     #         print(hobby)
 
     # 导入 copy 利用深拷贝完成对 request.GET的复制，以免直接修改了request.GET不安全
-    import copy
-    request_dpcp=copy.deepcopy(request.GET)
-    request_dpcp._mutable=True # 这是 QuerySet的类变量，置为True时 value才能别修改
-    print(request_dpcp)  # 输出如： <QueryDict: {'page': ['2'], 'key': ['xxxxx']}>
-    request_dpcp['page']=3 #点击下一页时只修改 page
-    print(request_dpcp)  # 输出如： <QueryDict: {'page': ['3'], 'key': ['xxxxx']}>
-    print(request_dpcp.urlencode()) #内置方法改成url，输出如： page=3&key=xxxxx&f=2
+    # import copy
+    # request_dpcp=copy.deepcopy(request.GET)
+    # request_dpcp._mutable=True # 这是 QuerySet的类变量，置为True时 value才能别修改
+    # print(request_dpcp)  # 输出如： <QueryDict: {'page': ['2'], 'key': ['xxxxx']}>
+    # request_dpcp['page']=3 #点击下一页时只修改 page
+    # print(request_dpcp)  # 输出如： <QueryDict: {'page': ['3'], 'key': ['xxxxx']}>
+    # print(request_dpcp.urlencode()) #内置方法改成url，输出如： page=3&key=xxxxx&f=2
 
 
     return HttpResponse("OK")

@@ -51,6 +51,21 @@ class UserInfoConfig(StarkConfig):
 class HobbyConfig(StarkConfig):
     search_list = ["title"]
 
+    #####################批量操作配置化#################################
+    mutil_list=[
+        {"func":"mutil_install","name":"批量装机"},
+        {"func":"mutil_export","name":"批量导出"},
+        {"func":"mutil_del","name":"批量删除"},
+    ]
+    def mutil_del(self,select_value,pk_list):
+        print("批量删除开始")
+        print(select_value)
+        print(pk_list)
+        obj=self.mcls.objects.filter(pk__in=pk_list)
+        obj.delete()
+    #####################批量操作配置化结束#################################
+
+
 # 进行site注册，即往site字典里加入 models
 site.registry(models.UserInfo,UserInfoConfig)
 site.registry(models.Role)

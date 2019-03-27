@@ -28,11 +28,15 @@
         .search_btn{
             float: right;
             padding-right: 0px;
-            {#bottom: -10px;#}
-            margin-bottom: 5px;
-            padding: 0px 0px;
+            padding-bottom: 0px;
+            {#margin-top: 50px;#}
+            margin-bottom: 0px;
+            float: bottom;
         }
-
+        /*下拉框对应的大form单样式*/
+        .selectBox{
+            padding-top: 0px;
+        }
         /*<!--下拉框样式-->*/
         .select_sty{
             margin-left: 0px;
@@ -40,34 +44,35 @@
             padding: 0px 0px;
         }
 
+
     </style>
 </head>
 <body>
 <div class="container">
 <h3>列表页面</h3>
 
-<div><a href="{{ flv.get_add_url }}" class="btn btn-info addRecord">添加</a></div>
 
-<!--搜索框 -->
-{%  if flv.search_list %}
-<form  class="search_btn col-md-4" method="get">
-  <div>
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="请输入关键字" name="search_key" value="{{ flv.search_key }}">
-      <span class="input-group-btn">
+    <!--搜索框 -->
+    {%  if flv.search_list %}
+    <form  class="search_btn col-md-4" method="get">
+        <div class="input-group">
+        <input type="text" class="form-control" placeholder="请输入关键字" name="search_key" value="{{ flv.search_key }}">
+        <span class="input-group-btn">
         <button class="btn btn-success" type="submit">
             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
         </button>
-      </span>
-    </div>
-  </div>
-</form>
-{% endif %}
-<!--搜索框结束--->
-
+        </span>
+        </div>
+    </form>
+    {% endif %}
+    <!--搜索框结束--->
 
 <!--下拉框大框架-->
-<form  method="post">
+<form  class="selectBox" method="post" >
+    <!--添加按钮-->
+    <a href="{{ flv.get_add_url }}" class="btn btn-info addRecord">添加</a>
+    <!--添加按钮结束-->
+
     <!--下拉框-->
     {% if flv.mutil_list %}
     {% csrf_token %}

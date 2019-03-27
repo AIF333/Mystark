@@ -221,42 +221,31 @@ class StarkConfig(object):
         return TempModleForm
 
     ###################  url配置相关 end ########################
+    def get_mutil_func(self,request):
+        if self.mutil_list:
+            # select_value 下拉框选择值 pk 选择器选择值
+            select_value = request.POST.get("select_value", '')
+            pk_list = request.POST.getlist("pk", '')
+            print(select_value, pk_list)
+            mutil_func = getattr(self, select_value, 'None')
 
+            if isinstance(mutil_func, FunctionType):
+                # print("FunctionType----")
+                mutil_func(self, select_value, pk_list)
+            elif isinstance(mutil_func, MethodType):
+                # print("MethodTyope--")
+                mutil_func(select_value, pk_list)
+            else:
+                print("nothing to do !")
     ########t##  四个基本视图 增删改查 start ######################
     def list_views(self,request):
 
-        self.mutil_list=[
-            {"func":"mutil_del","name":"批量删除呗"},
-            {"func":"mutil_install","name":"批量装机"},
-            {"func":"mutil_export","name":"批量导出"},
-        ]
-
-        if request.method == "POST":
-            pass
-            # select_value=request.POST.get("select_value",'')
-            # pk_list=request.POST.getlist("pk",'')
-            # print(select_value,pk_list)
-            # mutil_func=getattr(self,select_value,'None')
-            #
-            # if isinstance(mutil_func,FunctionType):
-            #     print("FunctionType----")
-            #     mutil_func(self,select_value,pk_list)
-            # elif isinstance(mutil_func,MethodType):
-            #     print("MethodTyope--")
-            #     mutil_func(select_value,pk_list)
-            # else:
-            #     print("nothing to do !")
-
-
+        if request.method == "POST": # 执行批量操作
+            self.get_mutil_func(request)
 
         queryResult = self.mcls.objects.all()
         flv = FacListViews(self, request,queryResult)
         return render(request,"list_views.html",{"flv":flv})
-
-    def mutil_del(self,select_value,pk_list):
-        print("批量删除开始")
-        print(select_value)
-        print(pk_list)
 
     def add_views(self,request):
 

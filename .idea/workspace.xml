@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12bc7cc7-f36f-4d7b-817b-4f6a0efbe3f3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/app01/stark.py" beforeDir="false" afterPath="$PROJECT_DIR$/app01/stark.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app01/templates/list_views.html" beforeDir="false" afterPath="$PROJECT_DIR$/app01/templates/list_views.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app01/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app01/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stark/service/V1.py" beforeDir="false" afterPath="$PROJECT_DIR$/stark/service/V1.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -90,17 +93,17 @@
         <counts>
           <entry key="cell" value="114" />
           <entry key="dummy" value="10" />
-          <entry key="html" value="2138" />
-          <entry key="py" value="12344" />
+          <entry key="html" value="2336" />
+          <entry key="py" value="12757" />
           <entry key="readme" value="21" />
           <entry key="txt" value="1521" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="2138" />
+          <entry key="HTML" value="2336" />
           <entry key="PLAIN_TEXT" value="1531" />
-          <entry key="Python" value="12365" />
+          <entry key="Python" value="12778" />
           <entry key="Scratch" value="114" />
         </counts>
       </usages-collector>
@@ -111,26 +114,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app01/stark.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="55" column="26" lean-forward="true" selection-start-line="55" selection-start-column="26" selection-end-line="55" selection-end-column="26" />
+            <state relative-caret-position="502">
+              <caret line="65" column="34" selection-start-line="65" selection-start-column="34" selection-end-line="65" selection-end-column="34" />
               <folding>
                 <element signature="e#0#57#0" expanded="true" />
-                <marker date="1553616903752" expanded="true" signature="955:1076" ph="..." />
-                <marker date="1553616903752" expanded="true" signature="1393:1423" ph="..." />
-                <marker date="1553616903752" expanded="true" signature="1422:1423" ph="..." />
+                <marker date="1553661406558" expanded="true" signature="955:1076" ph="..." />
+                <marker date="1553661406558" expanded="true" signature="1393:1916" ph="..." />
+                <marker date="1553661406558" expanded="true" signature="1915:1916" ph="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://570eca6b-5ebd-4a95-b4c1-19a49967f496/schema/main/table/app01_hobby">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
@@ -138,10 +132,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app01/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="907">
-              <caret line="27" column="14" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
+            <state relative-caret-position="245">
+              <caret line="12" column="38" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="38" />
               <folding>
-                <marker date="1553579374069" expanded="true" signature="103:108" ph="..." />
+                <marker date="1553660964876" expanded="true" signature="103:108" ph="..." />
               </folding>
             </state>
           </provider>
@@ -150,8 +144,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stark/service/V1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-426">
-              <caret line="225" column="33" selection-start-line="225" selection-start-column="33" selection-end-line="225" selection-end-column="33" />
+            <state relative-caret-position="267">
+              <caret line="243" column="39" selection-start-line="243" selection-start-column="39" selection-end-line="243" selection-end-column="39" />
               <folding>
                 <element signature="e#11#52#0" expanded="true" />
                 <element signature="e#770#1207#0" />
@@ -171,24 +165,26 @@
                 <element signature="e#7185#7590#0" />
                 <element signature="e#7637#7815#0" />
                 <element signature="e#7922#9252#0" />
-                <marker date="1553656183396" expanded="true" signature="512:1611" ph="..." />
-                <marker date="1553656183396" expanded="true" signature="1112:1121" ph="..." />
-                <marker date="1553656183396" expanded="true" signature="1558:1564" ph="..." />
-                <marker date="1553656183396" expanded="true" signature="1606:1611" ph="..." />
-                <marker date="1553656183396" expanded="true" signature="2130:2202" ph="..." />
-                <marker date="1553656183396" expanded="true" signature="4084:4093" ph="..." />
-                <marker date="1553656183396" expanded="true" signature="8679:8760" ph="..." />
+                <marker date="1553661353540" expanded="true" signature="512:1611" ph="..." />
+                <marker date="1553661353540" expanded="true" signature="1112:1121" ph="..." />
+                <marker date="1553661353540" expanded="true" signature="1558:1564" ph="..." />
+                <marker date="1553661353540" expanded="true" signature="1606:1611" ph="..." />
+                <marker date="1553661353540" expanded="true" signature="2130:2202" ph="..." />
+                <marker date="1553661353540" expanded="true" signature="4084:4093" ph="..." />
+                <marker date="1553661353540" expanded="true" signature="7576:8229" ph="..." />
+                <marker date="1553661353540" expanded="true" signature="8566:8572" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app01/templates/list_views.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="74" column="48" selection-start-line="74" selection-start-column="48" selection-end-line="74" selection-end-column="48" />
+            <state relative-caret-position="-504">
+              <caret line="56" column="37" selection-start-line="56" selection-start-column="37" selection-end-line="56" selection-end-column="37" />
               <folding>
+                <element signature="n#if#1;n#!!top" />
                 <element signature="n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" />
               </folding>
             </state>
@@ -198,7 +194,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/plugins/dist/css/bootstrap.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
+            <state relative-caret-position="-219">
               <caret line="308" column="1" selection-start-line="308" selection-start-column="1" selection-end-line="308" selection-end-column="1" />
             </state>
           </provider>
@@ -266,11 +262,11 @@
         <option value="$PROJECT_DIR$/stark/readme" />
         <option value="$PROJECT_DIR$/stark/readme.txt" />
         <option value="$PROJECT_DIR$/app01/tests.py" />
-        <option value="$PROJECT_DIR$/app01/views.py" />
         <option value="$PROJECT_DIR$/stark/utils/pagination.py" />
-        <option value="$PROJECT_DIR$/app01/stark.py" />
-        <option value="$PROJECT_DIR$/stark/service/V1.py" />
         <option value="$PROJECT_DIR$/app01/templates/list_views.html" />
+        <option value="$PROJECT_DIR$/app01/views.py" />
+        <option value="$PROJECT_DIR$/stark/service/V1.py" />
+        <option value="$PROJECT_DIR$/app01/stark.py" />
       </list>
     </option>
   </component>
@@ -440,11 +436,11 @@
       <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" weight="0.32954547" />
       <window_info anchor="bottom" id="Terminal" weight="0.3252841" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Event Log" sideWeight="0.1884715" side_tool="true" visible="true" weight="0.20454545" />
       <window_info anchor="bottom" id="Database Console" weight="0.32954547" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32954547" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.5894886" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8115285" weight="0.41477272" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -491,12 +487,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/stark/service/V1.py</url>
-          <line>225</line>
+          <line>240</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/stark/service/V1.py</url>
-          <line>253</line>
+          <line>247</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -767,6 +763,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app01/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-18">
+          <caret line="20" column="25" lean-forward="true" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+          <folding>
+            <marker date="1553523718594" expanded="true" signature="92:97" ph="..." />
+            <marker date="1553523718594" expanded="true" signature="556:669" ph="..." />
+            <marker date="1553523718594" expanded="true" signature="795:800" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/plugins/dist/css/bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-219">
+          <caret line="308" column="1" selection-start-line="308" selection-start-column="1" selection-end-line="308" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app01/templates/list_views.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-504">
+          <caret line="56" column="37" selection-start-line="56" selection-start-column="37" selection-end-line="56" selection-end-column="37" />
+          <folding>
+            <element signature="n#if#1;n#!!top" />
+            <element signature="n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app01/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="12" column="38" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="38" />
+          <folding>
+            <marker date="1553660964876" expanded="true" signature="103:108" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="das://570eca6b-5ebd-4a95-b4c1-19a49967f496/schema/main/table/app01_hobby">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -774,40 +810,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app01/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="907">
-          <caret line="27" column="14" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
-          <folding>
-            <marker date="1553579374069" expanded="true" signature="103:108" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app01/stark.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="55" column="26" lean-forward="true" selection-start-line="55" selection-start-column="26" selection-end-line="55" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#57#0" expanded="true" />
-            <marker date="1553616903752" expanded="true" signature="955:1076" ph="..." />
-            <marker date="1553616903752" expanded="true" signature="1393:1423" ph="..." />
-            <marker date="1553616903752" expanded="true" signature="1422:1423" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/plugins/dist/css/bootstrap.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="308" column="1" selection-start-line="308" selection-start-column="1" selection-end-line="308" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/stark/service/V1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-426">
-          <caret line="225" column="33" selection-start-line="225" selection-start-column="33" selection-end-line="225" selection-end-column="33" />
+        <state relative-caret-position="267">
+          <caret line="243" column="39" selection-start-line="243" selection-start-column="39" selection-end-line="243" selection-end-column="39" />
           <folding>
             <element signature="e#11#52#0" expanded="true" />
             <element signature="e#770#1207#0" />
@@ -827,35 +833,27 @@
             <element signature="e#7185#7590#0" />
             <element signature="e#7637#7815#0" />
             <element signature="e#7922#9252#0" />
-            <marker date="1553656183396" expanded="true" signature="512:1611" ph="..." />
-            <marker date="1553656183396" expanded="true" signature="1112:1121" ph="..." />
-            <marker date="1553656183396" expanded="true" signature="1558:1564" ph="..." />
-            <marker date="1553656183396" expanded="true" signature="1606:1611" ph="..." />
-            <marker date="1553656183396" expanded="true" signature="2130:2202" ph="..." />
-            <marker date="1553656183396" expanded="true" signature="4084:4093" ph="..." />
-            <marker date="1553656183396" expanded="true" signature="8679:8760" ph="..." />
+            <marker date="1553661353540" expanded="true" signature="512:1611" ph="..." />
+            <marker date="1553661353540" expanded="true" signature="1112:1121" ph="..." />
+            <marker date="1553661353540" expanded="true" signature="1558:1564" ph="..." />
+            <marker date="1553661353540" expanded="true" signature="1606:1611" ph="..." />
+            <marker date="1553661353540" expanded="true" signature="2130:2202" ph="..." />
+            <marker date="1553661353540" expanded="true" signature="4084:4093" ph="..." />
+            <marker date="1553661353540" expanded="true" signature="7576:8229" ph="..." />
+            <marker date="1553661353540" expanded="true" signature="8566:8572" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app01/models.py">
+    <entry file="file://$PROJECT_DIR$/app01/stark.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-18">
-          <caret line="20" column="25" lean-forward="true" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+        <state relative-caret-position="502">
+          <caret line="65" column="34" selection-start-line="65" selection-start-column="34" selection-end-line="65" selection-end-column="34" />
           <folding>
-            <marker date="1553523718594" expanded="true" signature="92:97" ph="..." />
-            <marker date="1553523718594" expanded="true" signature="556:669" ph="..." />
-            <marker date="1553523718594" expanded="true" signature="795:800" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app01/templates/list_views.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="74" column="48" selection-start-line="74" selection-start-column="48" selection-end-line="74" selection-end-column="48" />
-          <folding>
-            <element signature="n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="e#0#57#0" expanded="true" />
+            <marker date="1553661406558" expanded="true" signature="955:1076" ph="..." />
+            <marker date="1553661406558" expanded="true" signature="1393:1916" ph="..." />
+            <marker date="1553661406558" expanded="true" signature="1915:1916" ph="..." />
           </folding>
         </state>
       </provider>
