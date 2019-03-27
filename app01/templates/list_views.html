@@ -24,10 +24,20 @@
             background-color: cornflowerblue;
         }
 
-        .search{
+        /*!--搜索框样式-->*/
+        .search_btn{
             float: right;
             padding-right: 0px;
-            bottom: -10px;
+            {#bottom: -10px;#}
+            margin-bottom: 5px;
+            padding: 0px 0px;
+        }
+
+        /*<!--下拉框样式-->*/
+        .select_sty{
+            margin-left: 0px;
+            margin-bottom: 5px;
+            padding: 0px 0px;
         }
 
     </style>
@@ -36,11 +46,11 @@
 <div class="container">
 <h3>列表页面</h3>
 
-<a href="{{ flv.get_add_url }}" class="btn btn-info addRecord">添加</a>
+<div><a href="{{ flv.get_add_url }}" class="btn btn-info addRecord">添加</a></div>
 
 <!--搜索框 -->
 {%  if flv.search_list %}
-<form  class="search col-md-4" method="get">
+<form  class="search_btn col-md-4" method="get">
   <div>
     <div class="input-group">
       <input type="text" class="form-control" placeholder="请输入关键字" name="search_key" value="{{ flv.search_key }}">
@@ -56,24 +66,48 @@
 <!--搜索框结束--->
 
 
-<!--报表-->
-<table class="table table-bordered">
-    <tr>
-        {% for head in flv.head_list %}
-            <th>{{ head }}</th>
+<!--下拉框大框架-->
+<form  method="post">
+    <!--下拉框-->
+    {% if flv.mutil_list %}
+    {% csrf_token %}
+
+    <div class="input-group col-md-3 select_sty">
+      <select class="form-control" name="select_value">
+        <option>请选择操作</option>
+        {% for row in flv.mutil_list %}
+          <option value="{{ row.func }}">{{ row.name }}</option>
         {% endfor %}
-    </tr>
+      </select>
+      <span class="input-group-btn">
+        <button class="btn btn-success" type="submit">
+            执行
+        </button>
+      </span>
+    </div>
+    {% endif %}
 
-
-    {% for data in flv.data_list %}
+    <!--列表-->
+    <table class="table table-bordered">
         <tr>
-            {% for col in data %}
-                    <td>{{ col }}</td>
+            {% for head in flv.head_list %}
+                <th>{{ head }}</th>
             {% endfor %}
         </tr>
-    {% endfor %}
 
-</table>
+
+        {% for data in flv.data_list %}
+            <tr>
+                {% for col in data %}
+                        <td>{{ col }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+
+    </table>
+    <!--列表结束-->
+</form>
+<!--下拉框结束 由于下拉框需要CheckBox的值，所以需要把列表包含进去-->
 
 <!--分页-->
 <nav aria-label="Page navigation">
@@ -81,7 +115,7 @@
         {{ flv.get_page_html }}
     </ul>
 </nav>
-
+<!--分页结束-->
 </div>
 
 </body>

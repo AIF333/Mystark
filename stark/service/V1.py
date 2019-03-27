@@ -15,9 +15,8 @@ class FacListViews():
 
     # 分页对象 || 查询结果集对象 || 查询的输入值，需展示在前端
     page_obj = None
-    queryResult = None
 
-    def __init__(self,config,request):
+    def __init__(self,config,request,queryResult):
         '''
         :param config: 原类的实例，即StarkConfig的self
         :param queryResult: 表的查询结果querySet类型,如 models.Student.objects.all()
@@ -25,7 +24,9 @@ class FacListViews():
         '''
         self.config=config
         self.request=request
-        self.search_list=self.config.search_list
+        self.queryResult=queryResult
+        self.search_list=self.config.search_list # 搜索框
+        self.mutil_list=self.config.mutil_list # 批量操作 下拉框
 
         temp=request.GET.get("search_key",'')
         if temp:  # 剔除空格
@@ -36,7 +37,6 @@ class FacListViews():
     # 获取当前页面的数据，如有查询则数据会有变化,这个是第一个执行的,放在 head_list 里
     def init_queryResult(self):
         # 如果用户定义了查询列，则可进行查询
-        queryResult_flag=False
         if self.config.search_list:
             if self.search_key: # 如果查询有输入值
                 con = Q()
@@ -44,11 +44,8 @@ class FacListViews():
                 for col in self.config.search_list:
                     # print('----', ('%s__contains' % (col,), search_key))
                     con.children.append(('%s__contains' % (col,), self.search_key))
-                self.queryResult = self.config.mcls.objects.all().filter(con)
-                queryResult_flag=True
-        # 其他情况取全量数据
-        if not queryResult_flag:
-            self.queryResult=self.config.mcls.objects.all()
+                self.queryResult = self.queryResult.filter(con)
+
 
     # 初始化分页对象，这个是第二个执行，依赖get_queryResult的查询结果集
     def init_page_obj(self):
@@ -133,6 +130,9 @@ class StarkConfig(object):
     add_3display_flag = False
     # 搜索列表
     search_list=[]
+    # 批量操作列表
+    mutil_list=[]
+
 
     def __init__(self,mcls):
         self.mcls=mcls
@@ -224,12 +224,39 @@ class StarkConfig(object):
 
     ########t##  四个基本视图 增删改查 start ######################
     def list_views(self,request):
-        if request.method == "GET":
 
-            # 利用工厂函数生成分页的数据项和html
-            flv = FacListViews(self, request)
-            return render(request,"list_views.html",{"flv":flv})
+        self.mutil_list=[
+            {"func":"mutil_del","name":"批量删除呗"},
+            {"func":"mutil_install","name":"批量装机"},
+            {"func":"mutil_export","name":"批量导出"},
+        ]
 
+        if request.method == "POST":
+            pass
+            # select_value=request.POST.get("select_value",'')
+            # pk_list=request.POST.getlist("pk",'')
+            # print(select_value,pk_list)
+            # mutil_func=getattr(self,select_value,'None')
+            #
+            # if isinstance(mutil_func,FunctionType):
+            #     print("FunctionType----")
+            #     mutil_func(self,select_value,pk_list)
+            # elif isinstance(mutil_func,MethodType):
+            #     print("MethodTyope--")
+            #     mutil_func(select_value,pk_list)
+            # else:
+            #     print("nothing to do !")
+
+
+
+        queryResult = self.mcls.objects.all()
+        flv = FacListViews(self, request,queryResult)
+        return render(request,"list_views.html",{"flv":flv})
+
+    def mutil_del(self,select_value,pk_list):
+        print("批量删除开始")
+        print(select_value)
+        print(pk_list)
 
     def add_views(self,request):
 
