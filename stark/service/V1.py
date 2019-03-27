@@ -34,36 +34,48 @@ class FiledRow():
         self.parms=self.request_dpcp.urlencode()
         self._url_dict=self.config._url_dict # 列表页面
 
+    # 通过nid和文本生成对应的a标签
+    def get_value_html(self,nid,text):
+        self.request_dpcp[self.col] = nid
+        self.parms = self.request_dpcp.urlencode()
+        if str(nid) in self.pop_value:  # 如果在全部标签 剔除的值里，说明选择的是这个按钮
+            html = '<a class ="comb_row active" href="%s?%s">%s</a>' % (self._url_dict, self.parms, text)
+        else:
+            html = '<a class ="comb_row" href="%s?%s">%s</a>' % (self._url_dict, self.parms, text)
+        return mark_safe(html)
+
     def __iter__(self):
         # yield mark_safe('<a class ="comb_row" href="#">全部</a>')
-        if self.is_choice:  # choice类型
-            #字段在里面才去除,在里面也就说明选择的不是全部，全部就不用 active，else就需要active
-            if self.col in self.request_dpcp :
-                # 添加 全部的选择按钮，全部时，则需要把url中该属性给去掉 如选择性别的全部  ?gender=2&key=3 => ?key=3
-                self.pop_value=self.request_dpcp.pop(self.col) # pop_value ['2']
-                # print("pop_value",pop_value)
-                self.parms = self.request_dpcp.urlencode()
-                html = '<a class ="comb_row" href="%s?%s">全部</a>' % (self._url_dict, self.parms)
-            else:
-                html = '<a class ="comb_row active" href="%s?%s">全部</a>' % (self._url_dict, self.parms)
-            yield mark_safe(html)
 
+        #字段在里面才去除,在里面也就说明选择的不是全部，全部就不用 active，else就需要active
+        if self.col in self.request_dpcp :
+            # 添加 全部的选择按钮，全部时，则需要把url中该属性给去掉 如选择性别的全部  ?gender=2&key=3 => ?key=3
+            self.pop_value=self.request_dpcp.pop(self.col) # pop_value ['2']
+            # print("pop_value",pop_value)
+            self.parms = self.request_dpcp.urlencode()
+            html = '<a class ="comb_row" href="%s?%s">全部</a>' % (self._url_dict, self.parms)
+        else:
+            html = '<a class ="comb_row active" href="%s?%s">全部</a>' % (self._url_dict, self.parms)
+        yield mark_safe(html)
+
+        if self.is_choice:  # choice类型
             # 添加具体值的标签 如((1,男),(2,女))
             v_tuples=self.field_obj.choices
             for v in v_tuples: # (1,男)s
                 nid=v[0]
                 text=v[1]
-                self.request_dpcp[self.col]=nid
-                self.parms = self.request_dpcp.urlencode()
-                print(nid,self.pop_value,"----")
-                if str(nid) in self.pop_value: # 如果在全部标签 剔除的值里，说明选择的是这个按钮
-                    html='<a class ="comb_row active" href="%s?%s">%s</a>'%(self._url_dict,self.parms,text)
-                else:
-                    html = '<a class ="comb_row" href="%s?%s">%s</a>' % (self._url_dict, self.parms, text)
-                yield mark_safe(html)
+                print("------------",nid,text)
+                yield self.get_value_html(nid,text)
+        else: # 外键字段
+            foreModel = self.field_obj.related_model.objects.all()
+            for obj in foreModel:
+                nid = obj.pk
+                text = str(obj)
+                yield self.get_value_html(nid, text)
 
 
 # list_views的工厂类，因为列表页面的代码太多，全部放在工厂类里
+
 class FacListViews():
 
     # 分页对象 || 组合搜索的html
@@ -101,6 +113,18 @@ class FacListViews():
                     con.children.append(('%s__contains' % (col,), self.search_key))
                 self.queryResult = self.queryResult.filter(con)
 
+        # 组合查询
+        if self.config.comb_list:
+            comb_dict={}
+            for col in self.config.comb_list:
+                val=self.request.GET.get(col)
+                if val:
+                    comb_dict[col]=val
+
+            print(comb_dict)
+            if comb_dict:
+                self.queryResult = self.queryResult.filter(**comb_dict)
+
     def get_comb_html(self):
         if self.config.comb_list:
             for col in self.config.comb_list:
@@ -125,7 +149,7 @@ class FacListViews():
         pagedict["current_page"] = self.request.GET.get("page")
         pagedict["request"] = self.request
         pagedict["max_pages"] = 11  # 默认11，可不传入
-        pagedict["max_records"] = 10  # 默认10，可不传入
+        pagedict["max_records"] = 5  # 默认10，可不传入
 
         self.page_obj = Pageination(**pagedict)
 
@@ -134,6 +158,10 @@ class FacListViews():
         html = self.page_obj.bootstrap_page()
         return html
 
+    # 返回底部的记录数
+    def get_record_show(self):
+        html = self.page_obj.record_show()
+        return html
     # 列表的头显示
     def head_list(self):
         # 先初始化page对象

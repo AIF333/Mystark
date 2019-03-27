@@ -16,13 +16,16 @@ def test(request):
 
     gender_obj=models.UserInfo._meta.get_field("gender")
     dp_obj=models.UserInfo._meta.get_field("dp")
+    print(dp_obj,type(dp_obj))
+    print(dp_obj.related_model,type(dp_obj))
+    print(dp_obj.__dict__)
 
     from django.db.models.fields import IntegerField
 
-    print(gender_obj,type(gender_obj)) # django.db.models.fields.IntegerField
-    print(gender_obj.choices,type(gender_obj.choices),isinstance(gender_obj,IntegerField)) # ((1, '男'), (2, '女')) <class 'tuple'>
-    print(dp_obj,type(dp_obj)) # django.db.models.fields.related.ForeignKey
-    print(models.UserInfo.objects.all().values_list("dp__title"))
+    # print(gender_obj,type(gender_obj)) # django.db.models.fields.IntegerField
+    # print(gender_obj.choices,type(gender_obj.choices),isinstance(gender_obj,IntegerField)) # ((1, '男'), (2, '女')) <class 'tuple'>
+    # print(dp_obj,type(dp_obj)) # django.db.models.fields.related.ForeignKey
+    # print(models.UserInfo.objects.all().values_list("dp__title"))
     # for item in
     from django.db.models.fields import IntegerField
 

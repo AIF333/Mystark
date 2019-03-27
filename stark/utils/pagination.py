@@ -25,8 +25,9 @@ def host(request):
 
     page_obj=Pageination(**pagedict)
     res_obj=queryResult[page_obj.start:page_obj.end]
-
-    return render(request,"resmanage.html",{"html":page_obj.page()})
+    html=page_obj.page()
+    record_show=page_obj.record_show()
+    return render(request,"resmanage.html",{"html":html,"record_show":record_show})
     ###################################################################
     # 这里一定要注意的是 res_obj 需要取代原来的查询结果集，如原来写成的 #
     #  result=models.Strudent.objects.all() 则需要替换成              #
@@ -45,9 +46,18 @@ html:
         .active{
             background-color: cornflowerblue;
         }
+
+        .records{
+            color: #985f0d;
+        }
     </style>
 
+    <!--分页-->
     <div class="page">{{ html }}</div>
+    <!--底部的记录数和页数-->
+    {{ get_record_show }}
+
+
 '''
 
 
@@ -167,8 +177,6 @@ class Pageination(object):
         self.request_dpcp['page'] = self.page_num
         parms = self.request_dpcp.urlencode()
         s.append('<a href ="%s?%s">尾页</a>' % (self.url, parms))
-
-
         html = "".join(s)
 
         return  mark_safe(html)
@@ -250,8 +258,14 @@ class Pageination(object):
         parms = self.request_dpcp.urlencode()
         s.append('<li><a href ="%s?%s">尾页</a></li>' % (self.url, parms))
 
+        # 共100页 记录数112334
 
         html = "".join(s)
 
         return  mark_safe(html)
+
+    # 显示底部的记录数和页数
+    def record_show(self):
+        down_html=mark_safe('<span class="pull-right records">共%s页 记录数%s条</span>' % (self.page_num, self.record_sum))
+        return down_html
 

@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="/static/plugins/dist/js/bootstrap.js">
 
     <style>
+        .records{
+            color: #985f0d;
+        }
         .addRecord{
             margin-top: 10px;
             margin-bottom: 5px;
@@ -141,6 +144,8 @@
      <ul class="pagination">
         {{ flv.get_page_html }}
     </ul>
+    <!--分页底部 如：共4页 记录数20条-->
+    {{ flv.get_record_show }}
 </nav>
 <!--分页结束-->
 </div>
