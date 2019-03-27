@@ -44,6 +44,8 @@ class UserInfoConfig(StarkConfig):
      展示字段 不写则全字段展示，但是会存在不翻译问题，如 gender会显示0,1而不是男女 ，外键会展示 类对象，而不是 需要的字段
     '''
     list_display=['id','username','email',gender_display,dp_display]
+    # 组合搜索
+    comb_list=['gender','dp']
 
     # 搜素列
     search_list=["username","email"]

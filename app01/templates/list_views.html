@@ -44,13 +44,35 @@
             padding: 0px 0px;
         }
 
+        /*组合搜索样式*/
+        .comb_row{
+            display: inline-block;
+            border: 1px solid #dddddd;
+            padding: 1px 6px;
+            margin: 3px 3px;
+        }
 
+        .comb_search .active{
+            background-color: #5cb85c;
+            color: white;
+        }
     </style>
 </head>
 <body>
 <div class="container">
 <h3>列表页面</h3>
 
+    <!--组合搜索开始-->
+        <div class="comb_search">
+            {% for comb_list in flv.get_comb_html %}
+                <div>
+                    {% for item in comb_list %}
+                        {{ item }}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    <!--组合搜索结束-->
 
     <!--搜索框 -->
     {%  if flv.search_list %}

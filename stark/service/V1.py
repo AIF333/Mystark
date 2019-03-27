@@ -1,20 +1,74 @@
 # stark 配置
+from copy import deepcopy
 from types import FunctionType,MethodType
 
-from django.db.models import Q
+from django.db.models import Q, ForeignKey
 from django.shortcuts import render,HttpResponse,redirect
 from django.urls import path, reverse
 from django.forms import ModelForm
 from django.utils.safestring import mark_safe
 from stark.utils.pagination import Pageination # 分页组件
+from django.db.models.fields import IntegerField # 判断组合搜素的字段类型 choice为IntegerField
+
 
 # path 的一级分发的namespace
+
+# 做组合搜索的字段类型处理的类对象，需可迭代，实现 __iter__ 方法
+class FiledRow():
+    # 全部 时剔除的字段值列表
+    pop_value=[]
+    def __init__(self,config,col,filed_obj,is_choice=False):
+        '''
+
+        :param config: 引用对象
+        :param col: 字段 如 gender ， dp
+        :param filed_obj: models的字段对象 如 app01.UserInfo.gender （IntegerField类型） 、app01.UserInfo.dp（ForeignKey类型）
+        :param is_choice:  是否为choice对象（IntegerField类型）
+        '''
+        self.config=config
+        self.col=col
+        self.field_obj=filed_obj
+        self.is_choice=is_choice
+        self.request_dpcp = deepcopy(self.config.request.GET) # 拷贝request.GET，通过这个修改key值，防止get参数丢失
+        self.request_dpcp._mutable = True
+        self.parms=self.request_dpcp.urlencode()
+        self._url_dict=self.config._url_dict # 列表页面
+
+    def __iter__(self):
+        # yield mark_safe('<a class ="comb_row" href="#">全部</a>')
+        if self.is_choice:  # choice类型
+            #字段在里面才去除,在里面也就说明选择的不是全部，全部就不用 active，else就需要active
+            if self.col in self.request_dpcp :
+                # 添加 全部的选择按钮，全部时，则需要把url中该属性给去掉 如选择性别的全部  ?gender=2&key=3 => ?key=3
+                self.pop_value=self.request_dpcp.pop(self.col) # pop_value ['2']
+                # print("pop_value",pop_value)
+                self.parms = self.request_dpcp.urlencode()
+                html = '<a class ="comb_row" href="%s?%s">全部</a>' % (self._url_dict, self.parms)
+            else:
+                html = '<a class ="comb_row active" href="%s?%s">全部</a>' % (self._url_dict, self.parms)
+            yield mark_safe(html)
+
+            # 添加具体值的标签 如((1,男),(2,女))
+            v_tuples=self.field_obj.choices
+            for v in v_tuples: # (1,男)s
+                nid=v[0]
+                text=v[1]
+                self.request_dpcp[self.col]=nid
+                self.parms = self.request_dpcp.urlencode()
+                print(nid,self.pop_value,"----")
+                if str(nid) in self.pop_value: # 如果在全部标签 剔除的值里，说明选择的是这个按钮
+                    html='<a class ="comb_row active" href="%s?%s">%s</a>'%(self._url_dict,self.parms,text)
+                else:
+                    html = '<a class ="comb_row" href="%s?%s">%s</a>' % (self._url_dict, self.parms, text)
+                yield mark_safe(html)
+
 
 # list_views的工厂类，因为列表页面的代码太多，全部放在工厂类里
 class FacListViews():
 
-    # 分页对象 || 查询结果集对象 || 查询的输入值，需展示在前端
+    # 分页对象 || 组合搜索的html
     page_obj = None
+    comb_html_list = []
 
     def __init__(self,config,request,queryResult):
         '''
@@ -27,6 +81,7 @@ class FacListViews():
         self.queryResult=queryResult
         self.search_list=self.config.search_list # 搜索框
         self.mutil_list=self.config.mutil_list # 批量操作 下拉框
+        self._url_dict = reverse(self.config._url_dict["list_url"]) # 列表页面的url
 
         temp=request.GET.get("search_key",'')
         if temp:  # 剔除空格
@@ -46,6 +101,21 @@ class FacListViews():
                     con.children.append(('%s__contains' % (col,), self.search_key))
                 self.queryResult = self.queryResult.filter(con)
 
+    def get_comb_html(self):
+        if self.config.comb_list:
+            for col in self.config.comb_list:
+                _field=self.config.mcls._meta.get_field(col) # app01.UserInfo.gender 、app01.UserInfo.dp 等这种字段类型
+
+                # yield 相当于停顿的return 但是后面的代码会执行
+                # print(_field,type(_field))
+                if isinstance(_field,IntegerField):
+                    print(_field,"IntegerField")
+                    yield FiledRow(self,col,_field,is_choice=True)
+                elif isinstance(_field,ForeignKey):
+                    print(_field,"ForeignKey")
+                    yield FiledRow(self,col,_field,is_choice=False)
+                else:
+                    print("无效的输入，未做处理的字段类型！",_field,"---" )
 
     # 初始化分页对象，这个是第二个执行，依赖get_queryResult的查询结果集
     def init_page_obj(self):
@@ -132,6 +202,9 @@ class StarkConfig(object):
     search_list=[]
     # 批量操作列表
     mutil_list=[]
+    # 组合搜索
+    comb_list=[]
+
 
 
     def __init__(self,mcls):
@@ -245,6 +318,7 @@ class StarkConfig(object):
 
         queryResult = self.mcls.objects.all()
         flv = FacListViews(self, request,queryResult)
+
         return render(request,"list_views.html",{"flv":flv})
 
     def add_views(self,request):

@@ -1,3 +1,4 @@
+from django.db.models import IntegerField
 from django.shortcuts import render,HttpResponse,redirect
 
 # Create your views here.
@@ -10,8 +11,21 @@ def test(request):
     # print('----0',models.UserInfo._meta.fields[0].name,type(models.UserInfo._meta.fields[0]))
     # print('++',models.UserInfo._meta.fields[1].verbose_name)
     # print(models.UserInfo._meta.get_field("username").verbose_name)
-    obj=models.Hobby.objects.filter(pk__in=[1,2,3])
-    print(obj)
+    # obj=models.Hobby.objects.filter(pk__in=[1,2,3])
+    # print(obj)
+
+    gender_obj=models.UserInfo._meta.get_field("gender")
+    dp_obj=models.UserInfo._meta.get_field("dp")
+
+    from django.db.models.fields import IntegerField
+
+    print(gender_obj,type(gender_obj)) # django.db.models.fields.IntegerField
+    print(gender_obj.choices,type(gender_obj.choices),isinstance(gender_obj,IntegerField)) # ((1, '男'), (2, '女')) <class 'tuple'>
+    print(dp_obj,type(dp_obj)) # django.db.models.fields.related.ForeignKey
+    print(models.UserInfo.objects.all().values_list("dp__title"))
+    # for item in
+    from django.db.models.fields import IntegerField
+
 
     # obj=models.UserInfo.objects.filter(id=6).first()
     # print(obj)
